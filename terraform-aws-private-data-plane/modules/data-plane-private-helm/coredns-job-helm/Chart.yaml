@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Add bpm VM to teleport
+name: teleport-coredns-bootstrap
+version: 0.0.1

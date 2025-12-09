@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Add Windows for Teleport
+name: windows-job-helm
+version: 0.1.16

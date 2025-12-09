@@ -1,0 +1,8 @@
+#!/bin/bash
+set -euo pipefail
+
+platform_json_content='${json_content}'
+
+echo "$platform_json_content" > ${AYX_ETC}/platform.json
+
+${AYX_HOME}/startup.sh 2>&1 | tee ${AYX_LOG}/startup.log

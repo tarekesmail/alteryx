@@ -1,0 +1,9 @@
+*.zip
+.terraform
+.terraform.lock.hcl
+terraform.tfvars
+.DS_Store
+private_key.der
+public_key.der
+tls_private_key
+plan.out

@@ -1,0 +1,30 @@
+---
+stages:
+  - lint
+  - tag
+
+include:
+- project: futurama/hermes/automation/jobs
+  ref: v0.4
+  file: /terraform_lint.yml
+- project: automation/gitlab-jobs
+  file: /versioning.yml
+  ref: v1.4
+
+
+variables:
+  VERSIONING_FILE: ./VERSION.txt
+
+version_check:
+  extends: .version_check
+
+
+version_git_tags:
+  stage: tag
+  extends: .version_git_tags
+  before_script:
+  - GIT_TAG_VERSION="$(cat VERSION.txt)"
+
+terraform_lint:
+  stage: lint
+  extends: .terraform_lint

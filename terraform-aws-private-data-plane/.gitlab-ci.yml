@@ -1,0 +1,38 @@
+---
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_COMMIT_TAG
+
+stages:
+  - validate
+  - lint
+  - tag
+
+include:
+- project: futurama/hermes/automation/jobs
+  ref: v0.4
+  file: /terraform_lint.yml
+- project: futurama/hermes/automation/jobs
+  file: /semantic-release.yml
+  ref: v3.1.2
+- project: futurama/hermes/automation/jobs
+  file: /conventional-commits.yml
+  ref: v3.1.2
+
+validate-commits:
+  extends: .conventional-commits-check
+
+terraform_lint:
+  stage: lint
+  extends: .terraform_lint
+
+release:
+  stage: tag
+  extends: .semantic-release-base
+
+multi-tags:
+  stage: tag
+  extends: .multi-tags
+  needs: ["release"]

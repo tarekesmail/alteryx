@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bootstrap-register{{ .Release.Revision }}-{{ .Values.pdpName }}
+  annotations:
+    "helm.sh/hook": pre-upgrade,pre-install
+    "helm.sh/hook-weight": "-8"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  completions: 1
+  parallelism: 1
+  template:
+    spec:
+      serviceAccountName: cefd-registration
+      restartPolicy: Never
+      volumes:
+        - name: cefd-register
+          configMap:
+            name: cefd-register
+            defaultMode: 0755
+      containers:
+        - name: gcp-cronjob
+          image: gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine
+          volumeMounts:
+             - mountPath: /tmp/windows-teleport-bootstrap-register.sh
+               name: cefd-register
+               subPath: windows-teleport-bootstrap-register.sh
+               readOnly: true
+             - mountPath: /tmp/teleport-windows-token.yaml.tpl
+               name: cefd-register
+               subPath: teleport-windows-token.yaml.tpl
+               readOnly: true
+          env:
+          - name: TELEPORT_WINDOWS_TOKEN
+            value: {{ .Values.teleportWindowsToken | quote }}
+          command: [
+              "/bin/sh",
+              "-c",
+              "/tmp/windows-teleport-bootstrap-register.sh;" ]

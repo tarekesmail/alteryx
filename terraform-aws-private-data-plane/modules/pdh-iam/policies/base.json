@@ -1,0 +1,81 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetOpenIDConnectProvider",
+                "iam:GetPolicy",
+                "iam:GetPolicyVersion",
+                "iam:GetRole",
+                "iam:GetRolePolicy",
+                "iam:GetUser",
+                "iam:GetUserPolicy",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListAttachedUserPolicies",
+                "iam:ListGroupsForUser",
+                "iam:ListInstanceProfilesForRole",
+                "iam:ListPolicyTags",
+                "iam:ListPolicyVersions",
+                "iam:ListRolePolicies",
+                "iam:ListEntitiesForPolicy", 
+                "iam:SimulatePrincipalPolicy"
+            ],
+            "Resource": [
+                "arn:aws:iam::*:policy/*",
+                "arn:aws:iam::*:oidc-provider/*",
+                "arn:aws:iam::*:user/*",
+                "arn:aws:iam::*:role/*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor3",
+            "Effect": "Allow",
+            "Action": [
+                "elasticloadbalancing:*",
+                "iam:GetAccountName",
+                "iam:ListAccountAliases",
+                "iam:ListRoles",
+                "networkmanager:Describe*",
+                "networkmanager:Get*",
+                "networkmanager:List*",
+                "s3:GetBucketAcl",
+                "s3:GetBucketCORS",
+                "s3:GetBucketLocation",
+                "s3:GetBucketLogging",
+                "s3:GetBucketObjectLockConfiguration",
+                "s3:GetBucketOwnershipControls",
+                "s3:GetBucketPolicy",
+                "s3:GetBucketPolicyStatus",
+                "s3:GetBucketPublicAccessBlock",
+                "s3:GetBucketRequestPayment",
+                "s3:GetBucketTagging",
+                "s3:GetBucketVersioning",
+                "s3:GetBucketWebsite",
+                "s3:GetEncryptionConfiguration",
+                "s3:GetLifecycleConfiguration",
+                "s3:GetObject",
+                "s3:GetObjectAcl",
+                "s3:GetObjectVersion",
+                "s3:GetObjectVersionAcl",
+                "s3:GetObjectVersionAttributes",
+                "s3:GetObjectVersionForReplication",
+                "s3:GetObjectVersionTagging",
+                "s3:GetObjectVersionTorrent",
+                "s3:GetReplicationConfiguration",
+                "s3:ListAllMyBuckets",
+                "s3:ListBucket",
+                "s3:ListBucketVersions",
+                "sts:GetCallerIdentity"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor4",
+            "Effect": "Allow",
+            "Action": "secretsmanager:*",
+            "Resource": "arn:aws:secretsmanager:*:*:secret:*"
+        }
+    ]
+}

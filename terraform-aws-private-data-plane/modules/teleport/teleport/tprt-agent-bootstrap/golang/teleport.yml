@@ -1,0 +1,27 @@
+version: v3
+teleport:
+  proxy_server: {{.TeleportCluster}}:3024
+  auth_token: {{.TeleportToken}}
+{{if .TeleportCefdEnabled}}
+windows_desktop_service:
+  enabled: yes
+  non_ad_hosts:{{ range .TeleportNonAdHosts }}{{ printf "\n  - '%s'" . }}{{end}}
+  host_labels:
+    - match: '.*'
+      labels:{{ range $k, $v := .TeleportLabels }} {{ printf "\n        %s: %s" $k $v }}{{- end }}
+{{end}}
+{{if .TeleportEksEnabled}}
+app_service:
+  enabled: "yes"
+  apps:
+    - name: "{{ .TeleportAppName }}"
+      uri: tcp://{{ .TeleportEksHostName }}:443
+      labels:
+        tcp_app: pdp-argo
+{{end}}
+auth_service:
+  enabled: no
+proxy_service:
+  enabled: no
+ssh_service:
+  enabled: no

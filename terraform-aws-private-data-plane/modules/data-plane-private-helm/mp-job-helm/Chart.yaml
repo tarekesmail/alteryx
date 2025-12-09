@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Add Control Plane Cluster to ArgoCD
+name: teleport-bootstrap
+version: 0.1.4

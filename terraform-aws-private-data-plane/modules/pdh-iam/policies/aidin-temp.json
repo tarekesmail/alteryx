@@ -1,0 +1,46 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "elasticfilesystem:CreateFileSystem",
+                "elasticfilesystem:DeleteFileSystem",
+                "elasticfilesystem:DescribeFileSystems",
+                "elasticfilesystem:DescribeMountTargets",
+                "elasticfilesystem:CreateMountTarget",
+                "elasticfilesystem:DeleteMountTarget",
+                "elasticfilesystem:DescribeMountTargetSecurityGroups",
+                "elasticfilesystem:ModifyMountTargetSecurityGroups",
+                "elasticfilesystem:DescribeLifecycleConfiguration",
+                "elasticfilesystem:PutLifecycleConfiguration",
+                "elasticfilesystem:DescribeTags",
+                "elasticfilesystem:CreateTags",
+                "elasticfilesystem:DeleteTags",
+                "elasticfilesystem:TagResource",
+                "elasticfilesystem:ListTagsForResource",
+                "elasticfilesystem:UpdateFileSystem",
+                "elasticfilesystem:DescribeFileSystems",
+                "elasticfilesystem:UntagResource",
+                "elasticfilesystem:DeleteFileSystemPolicy",
+                "elasticfilesystem:DescribeFileSystemPolicy",
+                "elasticfilesystem:DescribeBackupPolicy",
+                "elasticfilesystem:Backup",
+                "elasticfilesystem:PutBackupPolicy",
+                "rds:ListTagsForResource",
+                "rds:RemoveTagsFromResource",
+                "rds:DescribeDBInstances",
+                "rds:AddTagsToResource",
+                "rds:ModifyDBInstance",
+                "rds:RebootDBInstance",
+                "rds:DeleteDBInstance",
+                "rds:CreateDBInstance",
+                "rds:DescribeDBSubnetGroups",
+                "rds:CreateDBSubnetGroup",
+                "rds:ModifyDBSubnetGroup",
+                "rds:DeleteDBSubnetGroup"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bootstrap-register{{ .Release.Revision }}-{{ .Values.corednsName }}
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "-8"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  completions: 1
+  parallelism: 1
+  template:
+    spec:
+      serviceAccountName: coredns-registration
+      restartPolicy: Never
+      volumes:
+        - name: coredns-register
+          configMap:
+            name: coredns-register
+            defaultMode: 0755
+      containers:
+        - name: gcp-cronjob
+          image: gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine
+          volumeMounts:
+            - mountPath: /tmp/coredns-register.sh
+              name: coredns-register
+              subPath: coredns-register.sh
+              readOnly: true
+            - mountPath: /tmp/teleport-token-coredns.yaml.tpl
+              name: coredns-register
+              subPath: teleport-token-coredns.yaml.tpl
+              readOnly: true
+          env:
+          - name: "KUBECTL_VERSION"
+            value: "v1.23.5"
+          - name: AWS_ACCOUNT_ID
+            value: {{ .Values.awsAccountId | quote }}
+          - name: PDP_NAME
+            value: {{ .Values.corednsTokenName | quote }}
+          - name: CLOUD
+            value: "AWS"
+          command: [
+            "/bin/sh",
+            "-c",
+            "/tmp/coredns-register.sh;" ]

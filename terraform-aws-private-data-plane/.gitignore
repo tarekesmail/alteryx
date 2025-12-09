@@ -1,0 +1,11 @@
+*.zip
+.terraform
+.terraform/*
+.terraform.lock.hcl
+.DS_Store
+private_key.der
+public_key.der
+tls_private_key
+.idea/
+*.tfvars
+*.tflint.hcl

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+pushd "$(git rev-parse --show-toplevel)" || exit
+terraform fmt -recursive
+terraform-docs markdown table --output-file README.md .
+git diff --exit-code README.md
+popd || exit
